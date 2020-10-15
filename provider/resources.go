@@ -28,14 +28,14 @@ import (
 // all of the token components used below.
 const (
 	// packages:
-	mainPkg = "scaleway"
+	scalewayPkg = "scaleway"
 	// modules:
-	mainMod = "index" // the y module
+	scalewayMod = "index" // the y module
 )
 
 // makeMember manufactures a type token for the package and the given module and type.
 func makeMember(mod string, mem string) tokens.ModuleMember {
-	return tokens.ModuleMember(mainPkg + ":" + mod + ":" + mem)
+	return tokens.ModuleMember(scalewayPkg + ":" + mod + ":" + mem)
 }
 
 // makeType manufactures a type token for the package and the given module and type.
@@ -98,35 +98,34 @@ func Provider() tfbridge.ProviderInfo {
 		License:     "Apache-2.0",
 		Homepage:    "https://pulumi.io",
 		Repository:  "https://github.com/Kamaradeivanov/pulumi-scaleway",
+		GitHubOrg:   "scaleway",
 		Config:      map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
 			"access_key": {
-				Type: makeType("access_key", "AccessKey"),
+				// Type: makeType("access_key", "AccessKey"),
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"SCW_ACCESS_KEY"},
 				},
 			},
 			"secret_key": {
-				Type: makeType("secret_key", "SecretKey"),
+				// Type: makeType("secret_key", "SecretKey"),
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"SCW_SECRET_KEY"},
 				},
 			},
 			"organization_id": {
-				Type: makeType("organization_id", "OrganizationId"),
+				// Type: makeType("organization_id", "OrganizationId"),
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"SCW_DEFAULT_ORGANIZATION_ID"},
 				},
 			},
 			"region": {
-				Type: makeType("region", "Region"),
+				// Type: makeType("region", "Region"),
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"SCW_DEFAULT_REGION"},
 				},
 			},
 			"zone": {
-				Type: makeType("zone", "Zone"),
+				// Type: makeType("zone", "Zone"),
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"SCW_DEFAULT_ZONE"},
 				},
@@ -138,64 +137,73 @@ func Provider() tfbridge.ProviderInfo {
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
 			//
-			// "aws_iam_role": {Tok: makeResource(mainMod, "IamRole")}
+			// "aws_iam_role": {Tok: makeResource(scalewayMod, "IamRole")}
 			//
 			// "aws_acm_certificate": {
-			// 	Tok: makeResource(mainMod, "Certificate"),
+			// 	Tok: makeResource(scalewayMod, "Certificate"),
 			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: makeType(mainPkg, "Tags")},
+			// 		"tags": {Type: makeType(scalewayPkg, "Tags")},
 			// 	},
 			// },
-			"scaleway_account_ssh_key":               {Tok: makeResource(mainMod, "AccountSSHKey")},
-			"scaleway_baremetal_server_beta":         {Tok: makeResource(mainMod, "BaremetalServerBeta")},
-			"scaleway_bucket":                        {Tok: makeResource(mainMod, "Bucket")},
-			"scaleway_instance_ip":                   {Tok: makeResource(mainMod, "InstanceIP")},
-			"scaleway_instance_ip_reverse_dns":       {Tok: makeResource(mainMod, "InstanceIPReverseDns")},
-			"scaleway_instance_volume":               {Tok: makeResource(mainMod, "InstanceVolume")},
-			"scaleway_instance_security_group":       {Tok: makeResource(mainMod, "InstanceSecurityGroup")},
-			"scaleway_instance_security_group_rules": {Tok: makeResource(mainMod, "InstanceSecurityGroupRules")},
-			"scaleway_instance_server":               {Tok: makeResource(mainMod, "InstanceServer")},
-			"scaleway_instance_placement_group":      {Tok: makeResource(mainMod, "InstancePlacementGroup")},
-			"scaleway_k8s_cluster_beta":              {Tok: makeResource(mainMod, "K8SClusterBeta")},
-			"scaleway_k8s_pool_beta":                 {Tok: makeResource(mainMod, "K8SPoolBeta")},
-			"scaleway_lb_beta":                       {Tok: makeResource(mainMod, "LbBeta")},
-			"scaleway_lb_backend_beta":               {Tok: makeResource(mainMod, "LbBackendBeta")},
-			"scaleway_lb_certificate_beta":           {Tok: makeResource(mainMod, "LbCertificateBeta")},
-			"scaleway_lb_frontend_beta":              {Tok: makeResource(mainMod, "LbFrontendBeta")},
-			"scaleway_registry_namespace_beta":       {Tok: makeResource(mainMod, "RegistryNamespaceBeta")},
-			"scaleway_rdb_instance_beta":             {Tok: makeResource(mainMod, "RdbInstanceBeta")},
-			"scaleway_object_bucket":                 {Tok: makeResource(mainMod, "ObjectBucket")},
-			"scaleway_user_data":                     {Tok: makeResource(mainMod, "UserData")},
-			"scaleway_server":                        {Tok: makeResource(mainMod, "Server")},
-			"scaleway_token":                         {Tok: makeResource(mainMod, "Token")},
-			"scaleway_ssh_key":                       {Tok: makeResource(mainMod, "SSHKey")},
-			"scaleway_ip":                            {Tok: makeResource(mainMod, "IP")},
-			"scaleway_ip_reverse_dns":                {Tok: makeResource(mainMod, "IPReverseDNS")},
-			"scaleway_security_group":                {Tok: makeResource(mainMod, "SecurityGroup")},
-			"scaleway_security_group_rule":           {Tok: makeResource(mainMod, "SecurityGroupRule")},
-			"scaleway_volume":                        {Tok: makeResource(mainMod, "Volume")},
-			"scaleway_volume_attachment":             {Tok: makeResource(mainMod, "VolumeAttachment")},
+			"scaleway_account_ssh_key":               {Tok: makeResource(scalewayMod, "AccountSSHKey")},
+			"scaleway_baremetal_server":         			{Tok: makeResource(scalewayMod, "BaremetalServer"),},
+			// "scaleway_bucket":                        {Tok: makeResource(scalewayMod, "Bucket")},
+			"scaleway_instance_ip":                   {Tok: makeResource(scalewayMod, "InstanceIP")},
+			"scaleway_instance_ip_reverse_dns":       {Tok: makeResource(scalewayMod, "InstanceIPReverseDns")},
+			"scaleway_instance_placement_group":      {Tok: makeResource(scalewayMod, "InstancePlacementGroup")},
+			"scaleway_instance_security_group":       {Tok: makeResource(scalewayMod, "InstanceSecurityGroup")},
+			"scaleway_instance_security_group_rules": {Tok: makeResource(scalewayMod, "InstanceSecurityGroupRules")},
+			"scaleway_instance_server":               {Tok: makeResource(scalewayMod, "InstanceServer")},
+			"scaleway_instance_volume":               {Tok: makeResource(scalewayMod, "InstanceVolume")},
+			"scaleway_ip":                            {Tok: makeResource(scalewayMod, "IP")},
+			"scaleway_ip_reverse_dns":                {Tok: makeResource(scalewayMod, "IPReverseDNS")},
+			"scaleway_k8s_cluster_beta":              {Tok: makeResource(scalewayMod, "K8SClusterBeta")},
+			"scaleway_k8s_pool_beta":                 {Tok: makeResource(scalewayMod, "K8SPoolBeta")},
+			"scaleway_lb_backend_beta":               {Tok: makeResource(scalewayMod, "LbBackendBeta")},
+			"scaleway_lb_beta":                       {Tok: makeResource(scalewayMod, "LbBeta")},
+			"scaleway_lb_certificate_beta":           {Tok: makeResource(scalewayMod, "LbCertificateBeta")},
+			"scaleway_lb_frontend_beta":              {Tok: makeResource(scalewayMod, "LbFrontendBeta")},
+			"scaleway_lb_ip_beta":              			{Tok: makeResource(scalewayMod, "LbIPBeta")},
+			"scaleway_object_bucket":                 {Tok: makeResource(scalewayMod, "ObjectBucket")},
+			"scaleway_rdb_instance_beta":             {Tok: makeResource(scalewayMod, "RdbInstanceBeta")},
+			"scaleway_registry_namespace_beta":       {Tok: makeResource(scalewayMod, "RegistryNamespaceBeta")},
+			"scaleway_security_group":                {Tok: makeResource(scalewayMod, "SecurityGroup")},
+			"scaleway_security_group_rule":           {Tok: makeResource(scalewayMod, "SecurityGroupRule")},
+			"scaleway_server":                        {Tok: makeResource(scalewayMod, "Server")},
+			"scaleway_ssh_key":                       {Tok: makeResource(scalewayMod, "SSHKey")},
+			"scaleway_token":                         {Tok: makeResource(scalewayMod, "Token")},
+			"scaleway_user_data":                     {Tok: makeResource(scalewayMod, "UserData")},
+			"scaleway_volume":                        {Tok: makeResource(scalewayMod, "Volume")},
+			"scaleway_volume_attachment":             {Tok: makeResource(scalewayMod, "VolumeAttachment")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
-			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
-			"scaleway_bootscript":              {Tok: makeDataSource(mainMod, "getBootscript")},
-			"scaleway_image":                   {Tok: makeDataSource(mainMod, "getImage")},
-			"scaleway_security_group":          {Tok: makeDataSource(mainMod, "getSecurityGroup")},
-			"scaleway_volume":                  {Tok: makeDataSource(mainMod, "getVolume")},
-			"scaleway_account_ssh_key":         {Tok: makeDataSource(mainMod, "getAccountSSHKey")},
-			"scaleway_instance_security_group": {Tok: makeDataSource(mainMod, "getInstanceSecurityGroup")},
-			"scaleway_instance_server":         {Tok: makeDataSource(mainMod, "getInstanceServer")},
-			"scaleway_instance_image":          {Tok: makeDataSource(mainMod, "getInstanceImage")},
-			"scaleway_instance_volume":         {Tok: makeDataSource(mainMod, "getInstanceVolume")},
-			"scaleway_baremetal_offer_beta":    {Tok: makeDataSource(mainMod, "getBaremetalOfferBeta")},
-			"scaleway_marketplace_image_beta":  {Tok: makeDataSource(mainMod, "getMarketplaceImageBeta")},
-			"scaleway_registry_namespace_beta": {Tok: makeDataSource(mainMod, "getRegistryNamespaceBeta")},
-			"scaleway_registry_image_beta":     {Tok: makeDataSource(mainMod, "getRegistryImageBeta")},
+			// "aws_ami": {Tok: makeDataSource(scalewayMod, "getAmi")},
+			"scaleway_account_ssh_key":         {Tok: makeDataSource(scalewayMod, "getAccountSSHKey")},
+			"scaleway_baremetal_offer":    			{
+				Tok: makeDataSource(scalewayMod, "getBaremetalOffer"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"cpu": {
+						Name: "cpus",
+					},
+				},
+			},
+			"scaleway_bootscript":              {Tok: makeDataSource(scalewayMod, "getBootscript")},
+			"scaleway_image":                   {Tok: makeDataSource(scalewayMod, "getImage")},
+			"scaleway_instance_image":          {Tok: makeDataSource(scalewayMod, "getInstanceImage")},
+			"scaleway_instance_security_group": {Tok: makeDataSource(scalewayMod, "getInstanceSecurityGroup")},
+			"scaleway_instance_server":         {Tok: makeDataSource(scalewayMod, "getInstanceServer")},
+			"scaleway_instance_volume":         {Tok: makeDataSource(scalewayMod, "getInstanceVolume")},
+			"scaleway_lb_ip_beta": 		          {Tok: makeDataSource(scalewayMod, "getLbIPBeta")},
+			"scaleway_marketplace_image_beta":  {Tok: makeDataSource(scalewayMod, "getMarketplaceImageBeta")},
+			"scaleway_registry_image_beta":     {Tok: makeDataSource(scalewayMod, "getRegistryImageBeta")},
+			"scaleway_registry_namespace_beta": {Tok: makeDataSource(scalewayMod, "getRegistryNamespaceBeta")},
+			"scaleway_security_group":          {Tok: makeDataSource(scalewayMod, "getSecurityGroup")},
+			"scaleway_volume":                  {Tok: makeDataSource(scalewayMod, "getVolume")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			AsyncDataSources: true,
+			// AsyncDataSources: true,
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^2.0.0",
